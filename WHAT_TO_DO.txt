@@ -1,0 +1,14 @@
+#DO THESE IN ORDER:
+git pull	#updates your local version from the server
+git add		#once you've put the files in the folder, run this on the
+		#files you want to put on the server.
+git commit -m	#commit your changes. Put a short message in quote marks 
+		#after the '-m' about the commit. Run this immediately 
+		#after git add. 
+git push	#push the changes to the server.
+
+
+
+#You can run this at any time to see what you need to do next:
+
+git status
