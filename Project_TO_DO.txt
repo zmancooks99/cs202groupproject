@@ -1,0 +1,38 @@
+#Step by Step parts of the program we need:
+#(Hopefully in Chronological Order)
+
+-Generate Board with only black and white textures
+	-There is no entire "Board" texture.
+
+-Generate Chess Pieces (only display)
+	-Change Colors using Code
+
+(If necessary)-Generate Background so it isn't console black.
+
+-------------------------------------------------------------
+
+-Program Movement for Pawn
+	-Followed by the other 5 pieces.
+
+-Program Collision Detection
+	-Which one attacked which?
+	-Remove Piece from board.
+
+-------------------------------------------------------------
+
+-Program Two Player Action
+	-Most likely by rotating the board to whoevers turn it is.
+
+-Program Four Player Action
+	-Generate two more sets of Chess Pieces
+
+-------------------------------------------------------------
+Extra Ideas go down here:
+-
+-
+-
+-
+-
+-
+-
+-
