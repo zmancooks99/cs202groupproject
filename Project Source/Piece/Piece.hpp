@@ -31,16 +31,16 @@ protected:
      */
     
     //All peices need to know what side they're on.
-    Piece(side) :_position(Location{0, 0}), _whichSide(side::NONE) {}
+    Piece(side) :_position(Location{0, 0}), _whichSide(side::NONE), poisoned(false){}
     
     //Ability to set an initial location for a piece.
-    Piece(side, Location) :_position(Location{0, 0}), _whichSide(side::NONE) {}
+    Piece(side, Location) :_position(Location{0, 0}), _whichSide(side::NONE), poisoned(false) {}
 
 public:
     //Virtual destructor
     virtual ~Piece() {}
     
-    //Pieces remove themselves when the Board calls their remove function.
+    //Pieces remove themselves when the program calls their remove function.
     //This should be done by calling the Board remove function on it's own current location.
     //This is implemented in the piece class in case of contingencies etc.
     virtual std::shared_ptr<Piece> remove() = 0;
@@ -58,9 +58,13 @@ public:
     
     //Returns the static_cast<int>(_whichSide) of the piece
     virtual int getSide() = 0;
+    
+    //Returns whether or not the piece is currently poisoned.
+    virtual bool isPoisoned(){return poisoned;}
 private:
     Location _position;
     side _whichSide;
+    bool poisoned;
     
 };
 #endif /* Piece_hpp */

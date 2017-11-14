@@ -36,6 +36,8 @@ public:
     //Moves a piece from the first provided location to the second provided location. Returns the new location.
     Location& move(Location&, Location&);
     
+    bool isOccupied(Location&);
+    
 private:
     static int _LENGTH; //Int representing board length and width
     static int _NUMPIECES;  //The number of peices in the game (total, not per side)

@@ -73,3 +73,9 @@ Location& Board::move(Location& from, Location& to)
     put(to, remove(from));
     return to;
 }
+
+//IsOccupied()
+bool Board::isOccupied(Location& loc)
+{
+    return (get(loc) != 0);
+}
