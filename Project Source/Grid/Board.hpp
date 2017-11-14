@@ -36,6 +36,9 @@ public:
     //Moves a piece from the first provided location to the second provided location. Returns the new location.
     Location& move(Location&, Location&);
     
+    //Returns all of the locations on the board that contain pieces.
+    std::vector<Location> getOccupiedLocations();
+    
     bool isOccupied(Location&);
     
 private:

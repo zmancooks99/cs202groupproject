@@ -41,7 +41,7 @@ public:
     virtual ~Piece() {}
     
     //Pieces remove themselves when the program calls their remove function.
-    //This should be done by calling the Board remove function on it's own current location.
+    //This should be done by calling the WORLD remove function on it's own current location.
     //This is implemented in the piece class in case of contingencies etc.
     virtual std::shared_ptr<Piece> remove() = 0;
     
@@ -53,7 +53,7 @@ public:
     
     //Takes the location to move to.
     //Location must be a valid location and piece should do it's own checking for validity.
-    //Returns new location. Should call grid move function to do actual board movement.
+    //Returns new location. Should call WORLD move function to do actual board movement.
     virtual Location& move(Location) = 0;
     
     //Returns the static_cast<int>(_whichSide) of the piece

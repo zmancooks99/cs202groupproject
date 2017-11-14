@@ -40,13 +40,14 @@ Board::~Board()
 //get()
 shared_ptr<Piece> Board::get(Location& loc)
 {
-    return _gameBoard[ loc.getX() ][ loc.getY() ];
+    return _gameBoard[ loc.getY() ][ loc.getX() ];
 }
 
 //put()
 shared_ptr<Piece> Board::put(Location& loc, shared_ptr<Piece> piece)
 {
-    _gameBoard[ loc.getX() ][ loc.getY() ] = piece;
+    _gameBoard[ loc.getY() ][ loc.getX() ] = piece;
+    
     return _gameBoard[ loc.getX() ][ loc.getY() ];
 }
 
@@ -55,7 +56,7 @@ shared_ptr<Piece> Board::remove(Location& loc)
 {
     (get(loc)->getSide() == 0) ? _removedPiecesBlack.push_back( get(loc) ):_removedPiecesWhite.push_back( get(loc) );
     shared_ptr<Piece> ptr = get(loc);
-    _gameBoard[ loc.getX() ][ loc.getY() ] = 0;
+    put(loc, 0);
     return ptr;
 }
 
@@ -78,4 +79,21 @@ Location& Board::move(Location& from, Location& to)
 bool Board::isOccupied(Location& loc)
 {
     return (get(loc) != 0);
+}
+
+//GetOccupiedLocations()
+std::vector<Location> Board::getOccupiedLocations()
+{
+    vector<Location> locs{};
+    for(int cc = 0; cc < _LENGTH; cc++)
+    {
+        for(int ii = 0; ii < _LENGTH; ii++)
+        {
+            Location loc{ii, cc};
+            if(isOccupied(loc))
+                locs.push_back(loc);
+                
+        }
+    }
+    return locs;
 }
