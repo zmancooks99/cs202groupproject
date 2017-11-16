@@ -19,7 +19,7 @@ class Piece /*Abstract*/
 //Using protected for the enum and constructors gives access to the functions by derived classes but not other classes
 //Makes the fact it's an abstract class more clear
 protected:
-    enum class side {BLACK, WHITE, NONE};   //NONE only exists for initializations sake in the abstract class constructor
+    enum side {BLACK, WHITE, NONE};   //NONE only exists for initializations sake in the abstract class constructor
     
     /*
      *ALL derived class constructors must call base class constructor EXPLICITELY in initializer list
@@ -31,10 +31,10 @@ protected:
      */
     
     //All peices need to know what side they're on.
-    Piece(side) :_position(Location{0, 0}), _whichSide(side::NONE), poisoned(false){}
+    Piece(side) :_position(Location{0, 0}), _whichSide(side::NONE), _poisoned(false){}
     
     //Ability to set an initial location for a piece.
-    Piece(side, Location) :_position(Location{0, 0}), _whichSide(side::NONE), poisoned(false) {}
+    Piece(side, Location loc) :_position(loc), _whichSide(side::NONE), _poisoned(false) {}
 
 public:
     //Virtual destructor
@@ -64,7 +64,7 @@ public:
 private:
     Location _position;
     side _whichSide;
-    bool poisoned;
+    bool _poisoned;
     
 };
 #endif /* Piece_hpp */
