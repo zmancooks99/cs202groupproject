@@ -10,8 +10,11 @@
 #define Piece_hpp
 
 #include <vector>
-
+#include <memory>
 #include "Location.hpp"
+
+//To use a World pointer
+class World;
 
 class Piece /*Abstract*/
 {
@@ -19,7 +22,7 @@ class Piece /*Abstract*/
 //Using protected for the enum and constructors gives access to the functions by derived classes but not other classes
 //Makes the fact it's an abstract class more clear
 protected:
-    enum side {BLACK, WHITE, NONE};   //NONE only exists for initializations sake in the abstract class constructor
+    enum Side {BLACK, WHITE, NONE};   //NONE only exists for initializations sake in the abstract class constructor
     
     /*
      *ALL derived class constructors must call base class constructor EXPLICITELY in initializer list
@@ -31,10 +34,10 @@ protected:
      */
     
     //All peices need to know what side they're on.
-    Piece(side) :_position(Location{0, 0}), _whichSide(side::NONE), _poisoned(false){}
+    Piece(std::shared_ptr<World> w, Side) :_Pworld(w), _position(Location{0, 0}), _whichSide(Side::NONE), _poisoned(false){}
     
     //Ability to set an initial location for a piece.
-    Piece(side, Location loc) :_position(loc), _whichSide(side::NONE), _poisoned(false) {}
+    Piece(std::shared_ptr<World> w, Side, Location loc) :_Pworld(w), _position(loc), _whichSide(Side::NONE), _poisoned(false) {}
 
 public:
     //Virtual destructor
@@ -57,13 +60,14 @@ public:
     virtual Location& move(Location) = 0;
     
     //Returns the static_cast<int>(_whichSide) of the piece
-    virtual int getSide() = 0;
+    virtual int getSide() {return static_cast<int>(_whichSide);}
     
     //Returns whether or not the piece is currently poisoned.
-    virtual bool isPoisoned(){return poisoned;}
+    virtual bool isPoisoned(){return _poisoned;}
 private:
+    std::shared_ptr<World> _Pworld;
     Location _position;
-    side _whichSide;
+    Side _whichSide;
     bool _poisoned;
     
 };
