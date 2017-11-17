@@ -54,6 +54,10 @@ Location operator-(Location& lhs, Location& rhs)
     Location temp = Location{(lhs.getX()-rhs.getX()), (lhs.getY()-rhs.getY())};
     return temp;
 }
+bool operator==(Location& lhs, Location& rhs)
+{
+    return (lhs.getX()==rhs.getX() && lhs.getY() == rhs.getY());
+}
 Location& Location::operator+=(const Location& rhs)
 {
     this->setX(_loc[0] + rhs.getX());
