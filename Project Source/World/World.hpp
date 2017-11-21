@@ -39,8 +39,13 @@ public:
     //This removes a piece from the world
     std::shared_ptr<Piece> remove(Location&);
     
+    //get location of a piece
+    Location getLoc(const Piece&);
+    
+    //returns the board
+    Board& getBoard();
+    
 private:
     Board _board;
 };
-
 #endif /* World_hpp */

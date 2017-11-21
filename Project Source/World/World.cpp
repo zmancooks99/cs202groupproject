@@ -38,16 +38,26 @@ Location World::locationClicked()
     //When the user clicks inside the world it should trigger a call to this function.
 }
 
-void World::add(Location& loc, std::shared_ptr<Piece> p)
+void World::add(Location& loc, shared_ptr<Piece> p)
 {
     //This should add a piece to the world at the given location.
     
     _board.put(loc, p);
 }
 
-std::shared_ptr<Piece> World::remove(Location& loc)
+shared_ptr<Piece> World::remove(Location& loc)
 {
     //This removes a piece from the world
     
     _board.remove(loc);
+}
+
+Location World::getLoc(const Piece& p)
+{
+    return _board.getLocation(p);
+}
+
+Board& World::getBoard()
+{
+    return _board;
 }
