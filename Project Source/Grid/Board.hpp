@@ -21,25 +21,27 @@ public:
     ~Board();
     
     //Returns a pointer to the piece at the given location.
-    std::shared_ptr<Piece> get(Location&);
+    std::shared_ptr<Piece> get(const Location&);
     
     //Places a piece in the grid at the provided location. Returns the same piece.
-    std::shared_ptr<Piece> put(Location&, const std::shared_ptr<Piece>);
+    std::shared_ptr<Piece> put(const Location&, const std::shared_ptr<Piece>);
     
     //Removes the piece at the given location from the grid and returns it.
-    std::shared_ptr<Piece> remove(Location&);
+    std::shared_ptr<Piece> remove(const Location&);
     
     //Exchanges the piece at the given location with the provided piece.
     //Functionally the same as using "put" on an occupied space but it returns the piece that WAS at the location.
-    std::shared_ptr<Piece> exchangePieces(Location&, std::shared_ptr<Piece>);
+    std::shared_ptr<Piece> exchangePieces(const Location&, std::shared_ptr<Piece>);
     
     //Moves a piece from the first provided location to the second provided location. Returns the new location.
-    Location& move(Location&, Location&);
+    const Location& move(const Location&, const Location&);
     
     //Returns all of the locations on the board that contain pieces.
     std::vector<Location> getOccupiedLocations();
     
-    bool isOccupied(Location&);
+    Location getLocation(const Piece&);
+    
+    bool isOccupied(const Location&);
     
 private:
     static int _LENGTH; //Int representing board length and width

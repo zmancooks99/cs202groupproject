@@ -7,7 +7,6 @@
 //
 
 #include "Location.hpp"
-
 using std::vector;
 
 Location::Location(int xLoc, int yLoc)

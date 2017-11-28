@@ -19,6 +19,7 @@ World::World(Board& board) : _board(board)
 World& World::build(Board& b)
 {
     //Build the graphics etc for the world
+    return *this;
 }
 
 
@@ -31,25 +32,29 @@ void World::show()
 World& World::update(Board& b)
 {
     //this will update the graphics when changes are made
+    return *this;
 }
 
 Location World::locationClicked()
 {
     //When the user clicks inside the world it should trigger a call to this function.
+    Location temp = {-1,-1};
+    
+    return temp;
 }
 
-void World::add(Location& loc, shared_ptr<Piece> p)
+void World::add(const Location& loc, shared_ptr<Piece> p)
 {
     //This should add a piece to the world at the given location.
     
     _board.put(loc, p);
 }
 
-shared_ptr<Piece> World::remove(Location& loc)
+shared_ptr<Piece> World::remove(const Location& loc)
 {
     //This removes a piece from the world
     
-    _board.remove(loc);
+    return _board.remove(loc);
 }
 
 Location World::getLoc(const Piece& p)
@@ -60,4 +65,13 @@ Location World::getLoc(const Piece& p)
 Board& World::getBoard()
 {
     return _board;
+}
+bool World::isOccupied(const Location& loc)
+{
+    return _board.isOccupied(loc);
+}
+
+std::shared_ptr<Piece> World::get(const Location& loc)
+{
+    return _board.get(loc);
 }

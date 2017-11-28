@@ -38,13 +38,13 @@ Board::~Board()
 }
 
 //get()
-shared_ptr<Piece> Board::get(Location& loc)
+shared_ptr<Piece> Board::get(const Location& loc)
 {
     return _gameBoard[ loc.getY() ][ loc.getX() ];
 }
 
 //put()
-shared_ptr<Piece> Board::put(Location& loc, shared_ptr<Piece> piece)
+shared_ptr<Piece> Board::put(const Location& loc, shared_ptr<Piece> piece)
 {
     _gameBoard[ loc.getY() ][ loc.getX() ] = piece;
     
@@ -52,7 +52,7 @@ shared_ptr<Piece> Board::put(Location& loc, shared_ptr<Piece> piece)
 }
 
 //remove()
-shared_ptr<Piece> Board::remove(Location& loc)
+shared_ptr<Piece> Board::remove(const Location& loc)
 {
     (get(loc)->getSide() == 0) ? _removedPiecesBlack.push_back( get(loc) ):_removedPiecesWhite.push_back( get(loc) );
     shared_ptr<Piece> ptr = get(loc);
@@ -61,7 +61,7 @@ shared_ptr<Piece> Board::remove(Location& loc)
 }
 
 //exchangePieces()
-shared_ptr<Piece> Board::exchangePieces(Location &loc, shared_ptr<Piece> p)
+shared_ptr<Piece> Board::exchangePieces(const Location &loc, shared_ptr<Piece> p)
 {
     shared_ptr<Piece> old = remove(loc);
     put(loc, p);
@@ -69,14 +69,14 @@ shared_ptr<Piece> Board::exchangePieces(Location &loc, shared_ptr<Piece> p)
 }
 
 //move()
-Location& Board::move(Location& from, Location& to)
+const Location& Board::move(const Location& from, const Location& to)
 {
     put(to, remove(from));
     return to;
 }
 
 //IsOccupied()
-bool Board::isOccupied(Location& loc)
+bool Board::isOccupied(const Location& loc)
 {
     return (get(loc) != 0);
 }
@@ -96,4 +96,12 @@ std::vector<Location> Board::getOccupiedLocations()
         }
     }
     return locs;
+}
+
+Location Board::getLocation(const Piece& p)
+{
+    Location temp = {-1,-1};
+    
+    return temp;
+    
 }

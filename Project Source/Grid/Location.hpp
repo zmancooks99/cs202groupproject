@@ -32,5 +32,5 @@ private:
 
 Location operator+(const Location&, const Location&);
 Location operator-(const Location&, const Location&);
-bool operator==(Location& lhs, Location& rhs)
+bool operator==(Location& lhs, Location& rhs);
 #endif /* Location_hpp */

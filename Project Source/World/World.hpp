@@ -34,10 +34,10 @@ public:
     Location locationClicked();
     
     //This should add a piece to the world at the given location.
-    void add(Location&, std::shared_ptr<Piece>);
+    void add(const Location&, std::shared_ptr<Piece>);
     
     //This removes a piece from the world
-    std::shared_ptr<Piece> remove(Location&);
+    std::shared_ptr<Piece> remove(const Location&);
     
     //get location of a piece
     Location getLoc(const Piece&);
@@ -45,6 +45,9 @@ public:
     //returns the board
     Board& getBoard();
     
+    bool isOccupied(const Location&);
+    
+    std::shared_ptr<Piece> get(const Location&);
 private:
     Board _board;
 };

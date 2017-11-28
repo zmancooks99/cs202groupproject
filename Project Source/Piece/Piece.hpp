@@ -19,11 +19,11 @@ class World;
 class Piece /*Abstract*/
 {
     
-//Using protected for the enum and constructors gives access to the functions by derived classes but not other classes
-//Makes the fact it's an abstract class more clear
+    //Using protected for the enum and constructors gives access to the functions by derived classes but not other classes
+    //Makes the fact it's an abstract class more clear
 protected:
     enum Side {BLACK, WHITE, NONE};   //NONE only exists for initializations sake in the abstract class constructor
-
+    
     /*
      *ALL derived class constructors must call base class constructor EXPLICITELY in initializer list
      *
@@ -38,7 +38,7 @@ protected:
     
     //Ability to set an initial location for a piece.
     Piece(std::shared_ptr<World> w, Side, Location loc) :_Pworld(w), _position(loc), _whichSide(Side::NONE), _poisoned(false) {}
-
+    
 public:
     //Virtual destructor
     virtual ~Piece() {}
@@ -49,10 +49,10 @@ public:
     virtual std::shared_ptr<Piece> remove() = 0;
     
     //Returns current location of the piece
-    virtual Location& getLoc() = 0;
+    virtual Location  getLoc() = 0;
     
     //Returns a vector filled with all available locations for the piece to move to.
-    virtual std::vector<Location>& getValidLocs() = 0;
+    virtual std::vector<Location> getValidLocs() = 0;
     
     //Takes the location to move to.
     //Location must be a valid location and piece should do it's own checking for validity.
