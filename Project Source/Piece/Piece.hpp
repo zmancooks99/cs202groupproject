@@ -23,7 +23,7 @@ class Piece /*Abstract*/
 //Makes the fact it's an abstract class more clear
 protected:
     enum Side {BLACK, WHITE, NONE};   //NONE only exists for initializations sake in the abstract class constructor
-    
+
     /*
      *ALL derived class constructors must call base class constructor EXPLICITELY in initializer list
      *
@@ -64,6 +64,29 @@ public:
     
     //Returns whether or not the piece is currently poisoned.
     virtual bool isPoisoned(){return _poisoned;}
+
+	std::shared_ptr<World> getPworld() {
+		return _Pworld;
+	}
+	
+	Side getWhichSide() {
+		return _whichSide;
+	}
+	bool getPoisoned() {
+		return _poisoned;
+	}
+	void setPWorld(std::shared_ptr<World> p) {
+		_Pworld = p;
+	}
+	void setLoc(Location l) {
+		_position = l;
+	}
+	void setWhichSide(Side s) {
+		_whichSide = s;
+	}
+	void setPoisoned(bool p) {
+		_poisoned = p;
+	}
 private:
     std::shared_ptr<World> _Pworld;
     Location _position;
