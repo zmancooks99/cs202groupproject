@@ -15,9 +15,10 @@ public:
 	~Pawn();
 
 	std::shared_ptr<Piece> remove() override; //all overwritten functions should have override after them.
-	Location & getLoc() override;
-	std::vector<Location> & getValidLocs() override;
+	Location getLoc() override;
+	std::vector<Location> getValidLocs() override;
 	Location & move(Location) override;
 private:
+	bool hasMoved = false;
 };
 #endif

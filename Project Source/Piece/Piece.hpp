@@ -60,28 +60,24 @@ public:
     virtual Location& move(Location) = 0;
     
     //Returns the static_cast<int>(_whichSide) of the piece
-    virtual int getSide() {return static_cast<int>(_whichSide);}
+    virtual int getSide() const {return static_cast<int>(_whichSide);}
     
     //Returns whether or not the piece is currently poisoned.
-    virtual bool isPoisoned(){return _poisoned;}
+    virtual bool isPoisoned() const {return _poisoned;}
 
-	std::shared_ptr<World> getPworld() {
+	std::shared_ptr<World> getWorld() const {
 		return _Pworld;
 	}
-	
-	Side getWhichSide() {
-		return _whichSide;
+	Location getLocation() {
+		return _position;
 	}
-	bool getPoisoned() {
-		return _poisoned;
-	}
-	void setPWorld(std::shared_ptr<World> p) {
+	void setWorld(std::shared_ptr<World> p) {
 		_Pworld = p;
 	}
 	void setLoc(Location l) {
 		_position = l;
 	}
-	void setWhichSide(Side s) {
+	void setSide(Side s) {
 		_whichSide = s;
 	}
 	void setPoisoned(bool p) {
