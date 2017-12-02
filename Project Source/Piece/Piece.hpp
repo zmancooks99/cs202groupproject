@@ -23,6 +23,7 @@ class Piece /*Abstract*/
     //Makes the fact it's an abstract class more clear
 protected:
     enum Side {BLACK, WHITE, NONE};   //NONE only exists for initializations sake in the abstract class constructor
+	enum Type {pawn, rook, knight, bishop, queen, king, none};
     
     /*
      *ALL derived class constructors must call base class constructor EXPLICITELY in initializer list
@@ -34,10 +35,10 @@ protected:
      */
     
     //All peices need to know what side they're on.
-    Piece(std::shared_ptr<World> w, Side) :_Pworld(w), _position(Location{0, 0}), _whichSide(Side::NONE), _poisoned(false){}
+    Piece(std::shared_ptr<World> w, Side, Type) :_Pworld(w), _position(Location{0, 0}), _whichSide(Side::NONE), _poisoned(false), _whichType(Type::none){}
     
     //Ability to set an initial location for a piece.
-    Piece(std::shared_ptr<World> w, Side, Location loc) :_Pworld(w), _position(loc), _whichSide(Side::NONE), _poisoned(false) {}
+    Piece(std::shared_ptr<World> w, Side, Type, Location loc) :_Pworld(w), _position(loc), _whichSide(Side::NONE), _whichType(Type::none), _poisoned(false) {}
     
 public:
     //Virtual destructor
@@ -65,6 +66,8 @@ public:
     //Returns whether or not the piece is currently poisoned.
     virtual bool isPoisoned() const {return _poisoned;}
 
+	virtual int getType() const { return static_cast<int>(_whichType); }
+
 	std::shared_ptr<World> getWorld() const {
 		return _Pworld;
 	}
@@ -84,9 +87,11 @@ public:
 		_poisoned = p;
 	}
 private:
+
     std::shared_ptr<World> _Pworld;
     Location _position;
     Side _whichSide;
+	Type _whichType;
     bool _poisoned;
     
 };
