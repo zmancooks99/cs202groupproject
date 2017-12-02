@@ -1,3 +1,4 @@
+
 #DO THESE IN ORDER:
 git pull	#updates your local version from the server
 git add		#once you've put the files in the folder, run this on the
