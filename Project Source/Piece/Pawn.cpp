@@ -38,14 +38,14 @@ vector<Location> Pawn::getValidLocs() {
 	}
 	if ((getLoc().getX() != 7) && (getLoc().getY() != 7) && (getLoc().getY() != 0)) {
 		if (getWorld()->isOccupied(Location{ tmp.getX() + 1,tmp.getY() + tmpY })) {
-			if (getWorld()->getBoard().get(Location{ tmp.getX() + 1,tmp.getY() + tmpY })->getSide() != getSide()) {
+			if (getWorld()->get(Location{ tmp.getX() + 1,tmp.getY() + tmpY })->getSide() != getSide()) {
 				locVector.push_back(Location{ tmp.getX() + 1, tmp.getY() + tmpY });
 			}
 		}
 	}
 	if ((getLoc().getX() != 0) && (getLoc().getY() != 7) && (getLoc().getY() != 0)) {
 		if (getWorld()->isOccupied(Location{ tmp.getX() - 1,tmp.getY() + tmpY })) {
-			if (getWorld()->getBoard().get(Location{ tmp.getX() + 1,tmp.getY() + tmpY })->getSide() != getSide()) {
+			if (getWorld()->get(Location{ tmp.getX() + 1,tmp.getY() + tmpY })->getSide() != getSide()) {
 				locVector.push_back(Location{ tmp.getX() - 1, tmp.getY() + tmpY });
 			}
 		}
@@ -66,8 +66,8 @@ Location & Pawn::move(Location l) {
 	if (isValid) {
 		if (getWorld()->isOccupied(l))
 			getWorld()->remove(l);
-		getWorld()->getBoard().put(l, std::make_shared<Piece>(this));
-		getWorld()->getBoard().put(getLoc(), 0); // this part is to remove the pointer to this piece at the location where this piece used to be.
+		getWorld()->add(l, std::make_shared<Piece>(this));
+		getWorld()->add(getLoc(), 0); // this part is to remove the pointer to this piece at the location where this piece used to be.
 		setLoc(l);
 	}
 	else {
