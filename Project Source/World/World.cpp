@@ -29,6 +29,14 @@ using sf::Vector2u;
 using sf::Sprite;
 using sf::Texture;
 
+vector <vector <Sprite>> PawnSprite(2, vector <Sprite>(8));
+vector <vector <Sprite>> RookSprite(2, vector <Sprite>(2));
+vector <vector <Sprite>> BishopSprite(2, vector <Sprite>(2));
+vector <vector <Sprite>> KnightSprite(2, vector <Sprite>(2));
+vector <Sprite> QueenSprite(2);
+vector <Sprite> KingSprite(2);
+vector <Sprite> TileSprite(64);
+RenderWindow window(VideoMode(640, 640), "CS202 Chess");
 //Constructor
 World::World(Board& board) : _board(board)
 {
@@ -38,9 +46,12 @@ World& World::build(Board& b)
 {
 	//0 = White || 1 = Black
 	//Textures
+	Color chessblack;
+	chessblack = Color(100, 100, 100);
 	Texture PawnTexture;
 	if (!PawnTexture.loadFromFile("Chess Pieces\\Pawn\\l0_ChessPieces6.png"))
 	{
+		//These cout's are useless, just for debugs
 		std::cout << "Failure" << std::endl;
 	}
 	Texture RookTexture;
@@ -80,58 +91,103 @@ World& World::build(Board& b)
 	//Sprite
 	//First Number is Color (0 = White || 1 = Black)
 	//Second Number is onscreen Number
-	vector <vector <Sprite>> PawnSprite(2, vector <Sprite>(8));
 	for (int loop = 0; loop < PawnSprite[0].size(); loop++)
 	{
 		PawnSprite[0][loop].setTexture(PawnTexture);
 		PawnSprite[1][loop].setTexture(PawnTexture);
-		PawnSprite[1][loop].setColor(Color(50, 50, 50));
+		PawnSprite[1][loop].setColor(chessblack);
+		PawnSprite[0][loop].setScale(2, 2);
+		PawnSprite[1][loop].setScale(2, 2);
 	}
-	vector <vector <Sprite>> RookSprite(2, vector <Sprite>(2));
 	for (int loop = 0; loop < RookSprite[0].size(); loop++)
 	{
+		//Sets the Texture
 		RookSprite[0][loop].setTexture(RookTexture);
 		RookSprite[1][loop].setTexture(RookTexture);
-		RookSprite[1][loop].setColor(Color(50, 50, 50));
+		//Sets the color to a color that is easily seen on the tiles.
+		RookSprite[1][loop].setColor(chessblack);
+		//Multiplies the Scale of the Texture by 2x
+		RookSprite[0][loop].setScale(2, 2);
+		RookSprite[1][loop].setScale(2, 2);
 	}
-	vector <vector <Sprite>> BishopSprite(2, vector <Sprite>(2));
 	for (int loop = 0; loop < BishopSprite[0].size(); loop++)
 	{
 		BishopSprite[0][loop].setTexture(BishopTexture);
 		BishopSprite[1][loop].setTexture(BishopTexture);
-		BishopSprite[1][loop].setColor(Color(50, 50, 50));
+		BishopSprite[1][loop].setColor(chessblack);
+		BishopSprite[0][loop].setScale(2, 2);
+		BishopSprite[1][loop].setScale(2, 2);
 	}
-	vector <vector <Sprite>> KnightSprite(2, vector <Sprite>(2));
 	for (int loop = 0; loop < KnightSprite[0].size(); loop++)
 	{
 		KnightSprite[0][loop].setTexture(KnightTexture);
 		KnightSprite[1][loop].setTexture(KnightTexture);
-		KnightSprite[1][loop].setColor(Color(50, 50, 50));
+		KnightSprite[1][loop].setColor(chessblack);
+		KnightSprite[0][loop].setScale(2, 2);
+		KnightSprite[1][loop].setScale(2, 2);
 	}
-	vector <Sprite> QueenSprite(2);
 	QueenSprite[0].setTexture(QueenTexture);
 	QueenSprite[1].setTexture(QueenTexture);
-	QueenSprite[1].setColor(Color(50, 50, 50));
-	vector <Sprite> KingSprite(2);
+	QueenSprite[1].setColor(chessblack);
+	QueenSprite[0].setScale(2, 2);
+	QueenSprite[1].setScale(2, 2);
 	KingSprite[0].setTexture(KingTexture);
 	KingSprite[1].setTexture(KingTexture);
-	KingSprite[1].setColor(Color(50, 50, 50));
-	vector <Sprite> TileSprite(64);
+	KingSprite[1].setColor(chessblack);
+	KingSprite[0].setScale(2, 2);
+	KingSprite[1].setScale(2, 2);
+	int xvalue, yvalue; //used for positioning the tiles
 	for (int loop = 0; loop < TileSprite.size(); loop++)
 	{
-		int xvalue, yvalue;
 		xvalue = (loop % 8);
 		yvalue = (loop / 8);
 		TileSprite[loop].setPosition((64 * xvalue) + 64, (64 * yvalue) + 64);
+		TileSprite[loop].setScale(2, 2);
+		if ((xvalue + yvalue) % 2 == 0)
+		{
+			TileSprite[loop].setTexture(TileTexture[0]); // 0 is white
+		}
+		else
+		{
+			TileSprite[loop].setTexture(TileTexture[1]); // 1 is black
+		}
 	}
+	/* This is the code to show the pieces on the board (correctly positioned)
 
-
+	//Black
+	RookSprite[1][0].setPosition(TileSprite[0].getPosition());
+	KnightSprite[1][0].setPosition(TileSprite[1].getPosition());
+	BishopSprite[1][0].setPosition(TileSprite[2].getPosition());
+	QueenSprite[1].setPosition(TileSprite[3].getPosition());
+	KingSprite[1].setPosition(TileSprite[4].getPosition());
+	BishopSprite[1][1].setPosition(TileSprite[5].getPosition());
+	KnightSprite[1][1].setPosition(TileSprite[6].getPosition());
+	RookSprite[1][1].setPosition(TileSprite[7].getPosition());
+	for (int loop = 0; loop < PawnSprite[1].size(); loop++)
+	{
+	PawnSprite[1][loop].setPosition(TileSprite[8+loop].getPosition());
+	}
+	//White
+	RookSprite[0][0].setPosition(TileSprite[63].getPosition());
+	KnightSprite[0][0].setPosition(TileSprite[62].getPosition());
+	BishopSprite[0][0].setPosition(TileSprite[61].getPosition());
+	QueenSprite[0].setPosition(TileSprite[60].getPosition());
+	KingSprite[0].setPosition(TileSprite[59].getPosition());
+	BishopSprite[0][1].setPosition(TileSprite[58].getPosition());
+	KnightSprite[0][1].setPosition(TileSprite[57].getPosition());
+	RookSprite[0][1].setPosition(TileSprite[56].getPosition());
+	for (int loop = 0; loop < PawnSprite[1].size(); loop++)
+	{
+	PawnSprite[0][loop].setPosition(TileSprite[55-loop].getPosition());
+	}
+	*/
     return *this;
 }
 
 
 void World::show()
 {
+	
 	window.clear();
 	for (int loop = 0; loop < PawnSprite[0].size(); loop++)
 	{
