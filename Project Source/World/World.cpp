@@ -244,7 +244,9 @@ shared_ptr<Piece> World::remove(const Location& loc)
 
 Location World::getLoc(const Piece& p)
 {
-    return _board.getLocation(p);
+    std::shared_ptr<Piece> sh;
+    sh.reset((Piece *)&p);
+    return _board.getLocation(sh);
 }
 
 Board& World::getBoard()
