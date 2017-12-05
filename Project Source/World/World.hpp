@@ -9,8 +9,13 @@
 #ifndef World_hpp
 #define World_hpp
 
+#include <iostream>
 #include <vector>
-
+#include <SFML/Graphics.hpp>
+#include <SFML/Window.hpp>
+#include <SFML/System.hpp>
+#include <math.h>
+#include <memory>
 #include "Board.hpp"
 #include "Location.hpp"
 #include "Piece.hpp"
