@@ -7,9 +7,27 @@
 //
 
 #include "World.hpp"
+#include <iostream>
+#include <SFML/System.hpp>
+#include <SFML/Graphics.hpp>
+#include <SFML/Window.hpp>
 
 using std::shared_ptr;
 using std::vector;
+using std::cout;
+using std::endl;
+
+using sf::RenderWindow;
+using sf::VideoMode;
+using sf::RectangleShape;
+using sf::CircleShape;
+using sf::Color;
+using sf::Event;
+using sf::Keyboard;
+using sf::Vector2f;
+using sf::Vector2u;
+using sf::Sprite;
+using sf::Texture;
 
 //Constructor
 World::World(Board& board) : _board(board)
@@ -99,12 +117,47 @@ World& World::build(Board& b)
 	KingSprite[1].setTexture(KingTexture);
 	KingSprite[1].setColor(Color(50, 50, 50));
 	vector <Sprite> TileSprite(64);
+	for (int loop = 0; loop < TileSprite.size(); loop++)
+	{
+		int xvalue, yvalue;
+		xvalue = (loop % 8);
+		yvalue = (loop / 8);
+		TileSprite[loop].setPosition((64 * xvalue) + 64, (64 * yvalue) + 64);
+	}
+
+
     return *this;
 }
 
 
 void World::show()
 {
+	window.clear();
+	for (int loop = 0; loop < PawnSprite[0].size(); loop++)
+	{
+		window.draw(PawnSprite[0][loop]);
+		window.draw(PawnSprite[1][loop]);
+	}
+	for (int loop = 0; loop < RookSprite[0].size(); loop++)
+	{
+		window.draw(RookSprite[0][loop]);
+		window.draw(RookSprite[1][loop]);
+	}
+	for (int loop = 0; loop < BishopSprite[0].size(); loop++)
+	{ 
+		window.draw(BishopSprite[0][loop]);
+		window.draw(BishopSprite[1][loop]);
+	}
+	for (int loop = 0; loop < KnightSprite[0].size(); loop++)
+	{ 
+		window.draw(KnightSprite[0][loop]);
+		window.draw(KnightSprite[1][loop]);
+	}
+	window.draw(QueenSprite[0]);
+	window.draw(QueenSprite[1]);
+	window.draw(KingSprite[0]);
+	window.draw(KingSprite[1]);
+	window.display();
     //this should handle displaying the world
 }
 
