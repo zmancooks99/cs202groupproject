@@ -29,5 +29,5 @@ int main()
     Board b{};
     World w{b};
     w.build(b);
-    
+    w.show();
 }
